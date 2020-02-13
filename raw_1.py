@@ -88,20 +88,20 @@ def process(fileName):
     inputFile.close()
 
 
-    #  Print input data
+    #  Printing the input data
     print("INPUT")
     print(firstLine)
     print(secondLine)
 
-    #  Assign parameters
+    #  Assigning parameters
     MAX, NUM = list(map(int, firstLine.split()))
 
-    #  Create the pizza list by reading the file
+    #  Createing the pizza list by reading the file
     inputList = list(map(int, secondLine.split()))
 
     outputList = solve(MAX, inputList)  # Solve the problem and get output
 
-    #  Print output data and create output file
+    #  Printing output data and create output file
        
     print("")
     print("OUTPUT")

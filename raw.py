@@ -118,4 +118,6 @@ fileNames = ["a_example", "b_small", "c_medium",
 
 for fileName in fileNames:  # Take each and every file and solve
     process(fileName)
+
+    print()
     #fileName(open)
