@@ -3,7 +3,7 @@ def solve((MAX, inputList):
     max_score = 0
     sum = 0
     startIndex = fullSize   
-
+    
 
 
 
