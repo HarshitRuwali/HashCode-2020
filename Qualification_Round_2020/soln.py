@@ -8,7 +8,7 @@ max_all = 1000
 
 with open(cur_dir+'.txt', 'r') as f_in:
 	os.path.dirname(os.path.abspath("__file__"))
-
+	python -tt scriptname.py
     book_count = int(f_in.readline())
     all = []
     vert = []
