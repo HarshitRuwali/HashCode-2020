@@ -12,13 +12,13 @@ book_count = int(f_in.readline())
 all = []
 vert = []
 i = 0
-    for i in range(book_count):
-        book = f_in.readline().rstrip().split(" ")
-        if book[0] == "H":
-            all.append([int(book[1]), [x for x in book[2:]], (i,)])
-        else:
-            vert.append([int(book[1]), [x for x in book[2:]], (i,)])
-        i += 1
+for i in range(book_count):
+    book = f_in.readline().rstrip().split(" ")
+    if book[0] == "H":
+        all.append([int(book[1]), [x for x in book[2:]], (i,)])
+    else:
+        vert.append([int(book[1]), [x for x in book[2:]], (i,)])
+    i += 1
 f_in.close()
 
 #print(all)
