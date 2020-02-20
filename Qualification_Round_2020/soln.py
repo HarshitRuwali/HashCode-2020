@@ -8,11 +8,9 @@ max_all = 1000
 
 with open(cur_dir+'.txt', 'r') as f_in:
 	os.path.dirname(os.path.abspath("__file__"))
-<<<<<<< HEAD
+
 	python -tt scriptname.py
-=======
-    #python -m tabnanny yourfile.py
->>>>>>> c7c954e3922a5b42308c37a21e630f1cae44d342
+
     book_count = int(f_in.readline())
     all = []
     vert = []
