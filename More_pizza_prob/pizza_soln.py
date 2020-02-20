@@ -1,70 +1,81 @@
 #import os
 
-def solve(MAX, inputList):
+from sys import argv
 
-    currentIndexList = [] 
-    currentValueList = []
-    solutionIndexList = [] 
-    solutionValueList = [] 
+max_vert = 1000
+max_all = 1000
 
-    fullSize = len(inputList)
-    startIndex = fullSize 
-    maxScore = 0 
-    sum = 0
+with open(cur_dir+'.txt', 'r') as f_in:
+    book_count = int(f_in.readline())
+    all = []
+    vert = []
+    i = 0
+    for i in range(book_count):
+        book = f_in.readline().rstrip().split(" ")
+        if book[0] == "H":
+            all.append([int(book[1]), [x for x in book[2:]], (i,)])
+        else:
+            vert.append([int(book[1]), [x for x in book[2:]], (i,)])
+        i += 1
+f_in.close()
 
-    while((len(currentIndexList) > 0 and currentIndexList[0] != 0) or len(currentIndexList) == 0):
+#print(all)
+#print(vert)
 
-        startIndex = startIndex - 1 
 
-        for i in range(startIndex, -1, -1):
+#vert = []
 
-            currentValue = inputList[i]
 
-            tempSum = sum + currentValue 
+while len(vert) > 1:
+    max_tags, id = 0, 0
+    for i in range(1, min(max_vert, len(vert))):
+        union = list(set(vert[0][1]+vert[id][1]))
+        num_tags = len(union)
+        if num_tags > max_tags:
+            max_tags = num_tags
+            id = i
+    all.append([max_tags, union, (vert[0][2][0], vert[id][2][0])])
+    vert.pop(id)
+    vert.pop(0)
 
-            if (tempSum == MAX):  
-                sum = tempSum
-                currentIndexList.append(i) 
-                currentValueList.append(currentValue)
-                break
+#print(all)
 
-            elif (tempSum > MAX):
-                continue  
+def score(id0, id1):
+    x = len(set(all[id0][1]) & set(all[id1][1]))
+    y = len(set(all[id0][1]) - set(all[id1][1]))
+    z = len(set(all[id1][1]) - set(all[id0][1]))
+    return min(x, y, z)
 
-            elif (tempSum < MAX):
-                sum = tempSum
-                currentIndexList.append(i) 
-                currentValueList.append(currentValue) 
-                continue  
-        if (maxScore < sum):
-            maxScore = sum 
+def write_out(id):
+    if len(all[id][2]) == 1:
+        f_out.write('%d\n' % (all[id][2][0]))
+    else:
+        f_out.write('%d %d\n' % (all[id][2][0], all[id][2][1]))
 
-            solutionIndexList = []
-            solutionValueList = []
+#f_out = open(str(argv[1])+'.out', 'w+')
+#f_out.write(str(len(all))+'\n')
 
-            for y in currentIndexList:
-                solutionIndexList.append(y)  
-            for y in currentValueList:
-                solutionValueList.append(y) 
+write_out(0)
 
-        if (maxScore == MAX):
-            break 
+counter = 0
+for i in range(1,len(all)-1): #len(all)-2 times
+    max_score, id = 0, 1
+    for i in range(1, min(max_all, len(all))):
+        curr_score = score(0, i)
+        if curr_score > max_score:
+            max_score = curr_score
+            id = i
+    write_out(id)
+    counter += 1
+    if counter % 10000 == 0:
+        print(counter)
+    all[0], all[id] = all[id], all[0]
+    all.pop(id)
 
-        if(len(currentValueList) != 0):
-            lastVal = currentValueList.pop()
-            sum = sum - lastVal 
+#print(all)
+write_out(1)
 
-        if(len(currentIndexList) != 0):
-            lastIndex = currentIndexList.pop() 
-            startIndex = lastIndex 
-
-        if(len(currentIndexList) == 0 and (startIndex == 0)): 
-            break
-
-    print("SCORE = " + str(maxScore))  
-
-    return solutionIndexList  
-
+f_out.close()
 
 def process(fileName):
 
