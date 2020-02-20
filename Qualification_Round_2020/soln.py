@@ -3,7 +3,10 @@ def solve((MAX, inputList):
     max_score = 0
     sum = 0
     startIndex = fullSize   
-    
+
+   libraryindex =[]
+
+
 
 
 
@@ -13,7 +16,7 @@ def process(fileName):
     print(fileName)
     print("######")
 
-    inputFile = open(fileName + ".in", "rt")
+    inputFile = open(fileName + ".txt", "rt")
 
     #  Reading file
     firstLine = inputFile.readline()
