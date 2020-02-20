@@ -9,9 +9,9 @@ max_all = 1000
 with open(cur_dir+'.txt', 'r') as f_in:
 	os.path.dirname(os.path.abspath("__file__"))
 book_count = int(f_in.readline())
-    all = []
-    vert = []
-    i = 0
+all = []
+vert = []
+i = 0
     for i in range(book_count):
         book = f_in.readline().rstrip().split(" ")
         if book[0] == "H":
