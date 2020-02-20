@@ -1,5 +1,8 @@
-
-
+def solve((MAX, inputList):
+    currentLibrary = []
+    max_score = 0
+    sum = 0
+    startIndex = fullSize   
 
 
 
