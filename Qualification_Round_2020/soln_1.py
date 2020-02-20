@@ -1,8 +1,9 @@
 def(MAX, ):
     day = []
     maxsum = []
+    input = []
+    book = 0
     
-
 
 
 def process(fileName):
