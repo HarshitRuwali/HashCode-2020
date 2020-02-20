@@ -7,6 +7,7 @@ max_vert = 1000
 max_all = 1000
 
 with open(cur_dir+'.txt', 'r') as f_in:
+	os.path.dirname(os.path.abspath("__file__"))
     book_count = int(f_in.readline())
     all = []
     vert = []
