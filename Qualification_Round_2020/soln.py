@@ -5,10 +5,9 @@ def solve((MAX, inputList):
     startIndex = fullSize   
 
    libraryindex =[]
+   libraryscanning  = []
 
-
-
-
+   while libray
 
 def process(fileName):
 
