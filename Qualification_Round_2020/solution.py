@@ -1,7 +1,7 @@
 # time remain = deadline - time(singup) - time(total)
 
 import numpy as np
-#import tqdm
+import tqdm
 import os
 
 class Library():
@@ -34,7 +34,9 @@ for FILE in os.listdir('.'):
 
 		time = D - library.singup_time - curr_time  #checking the time availability
 
-		sorted_books = sorted(library.books - assigned_books, key lmabda = b: -book_scores[b])
+		#sorted_books = sorted(library.books - assigned_books, key lmabda = b: -book_scores[b])
+		sorted_books = sorted(library.books - assigned_books, 
+				      key=lambda b: -book_scores[b])
 
 		return list(sorted_books)[:time*library.n_books_day]
 
@@ -62,8 +64,44 @@ for FILE in os.listdir('.'):
 
 	asm_libraries = []
 
-	
 
+	# Iteratively take the best possible library and schedule it
+	for _ in tqdm(range(L)):
+		scores = [score(x, assigned_books, curr_time, assigned_libraries)
+			  for x in libraries]
+
+		best_library = np.argmax(libraries[best_library])
+
+		best_books = get_best_books(libraries[best_library], assigned_books, curr_time)
+
+		#if we pass the deadline or already assigned the library
+		if best_library in assigned_libraries:
+			break
+
+		curr_time = curr_time + libraries[best_library].signup_time
+		if curr_time >= D:
+			break
+
+		asm_books.append(best_books)
+		asm_libraries.append(best_library)
+
+		assigned_books = assigned_books.union(set(best_books))
+		assigned_libraries.add(libraries[best_library])
+
+
+
+		total_score = 0
+		with open('{}.out'.format(FIlE), 'w+') as ofp:
+			opf.write('{}\n'.format(len(asm_libraries)))
+			for i, l in enumerate(asm_libraries):
+				ofp.write('{} {}\n'.format(l, len(asm_books[i])))
+				ofp.write('{}\n'/format(' '.join(map(str, asm_books[i])))
+				total_score = total_score + sum(book_scores[x] for x in asm_books[i])
+
+
+
+
+	print(FILE, total_score)
 
 
 
